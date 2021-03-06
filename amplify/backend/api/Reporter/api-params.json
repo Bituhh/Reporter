@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/user",
+            "lambdaFunction": "GetUser",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/user"
+        }
+    ],
+    "resourceName": "Reporter",
+    "apiName": "Reporter",
+    "functionArns": [
+        {
+            "lambdaFunction": "GetUser"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-reporter-dev-225628-authRole",
+        "unAuthRoleName": "amplify-reporter-dev-225628-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "GetUser",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
