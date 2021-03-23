@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -13,6 +16,20 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "crypto-js",
+              "uuid",
+              "buffer",
+              "@aws-crypto/sha256-js",
+              "@aws-crypto/crc32",
+              "@aws-crypto/sha256-browser",
+              "js-cookie",
+              "lodash",
+              "zen-observable",
+              "axios",
+              "isomorphic-unfetch",
+              "fast-xml-parser"
+            ],
             "outputPath": "dist/reporter",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -24,6 +41,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -87,6 +105,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -118,6 +137,11 @@
           }
         }
       }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
     }
   },
   "defaultProject": "reporter"

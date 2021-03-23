@@ -8,6 +8,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
@@ -15,7 +16,10 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "crypto": ["node_modules/crypto-js"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false

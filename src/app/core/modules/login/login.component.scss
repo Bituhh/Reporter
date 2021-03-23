@@ -1,0 +1,23 @@
+.full-screen {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 3fr 2fr;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+
+.login {
+  display: grid;
+  grid-column: 2;
+  grid-row: 2;
+  height: fit-content;
+}
+
+.mat-card-header {
+  justify-content: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}

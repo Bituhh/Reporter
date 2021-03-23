@@ -18,7 +18,7 @@
       "function": {
         "GetUser": {
           "deploymentBucketName": "amplify-reporter-dev-225628-deployment",
-          "s3Key": "amplify-builds/GetUser-657438735431726b3332-build.zip"
+          "s3Key": "amplify-builds/GetUser-76767354527133484a4f-build.zip"
         }
       }
     }
