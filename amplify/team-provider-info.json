@@ -12,14 +12,14 @@
       "AmplifyAppId": "d4p1qvzxt2n8a"
     },
     "categories": {
-      "auth": {
-        "reporter6c8f4925": {}
-      },
       "function": {
         "GetUser": {
           "deploymentBucketName": "amplify-reporter-dev-225628-deployment",
-          "s3Key": "amplify-builds/GetUser-76767354527133484a4f-build.zip"
+          "s3Key": "amplify-builds/GetUser-3934656a4e5858356964-build.zip"
         }
+      },
+      "auth": {
+        "reporter53f070d5": {}
       }
     }
   },

@@ -1,0 +1,15 @@
+.full-screen {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 3fr 2fr;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+
+.container {
+  display: grid;
+  grid-column: 2;
+  grid-row: 2;
+  height: fit-content;
+  position: relative;
+}

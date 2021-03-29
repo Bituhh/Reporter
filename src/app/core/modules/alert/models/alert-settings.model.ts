@@ -1,7 +1,8 @@
 import {TemplateRef} from '@angular/core';
 import {AlertButtonSettings} from './alert-button-settings.model';
+import {AlertResult} from './alert-result.model';
 
-export interface AlertDialogData {
+export interface AlertSettings {
   title: string;
   message?: string;
   html?: string;
@@ -9,8 +10,6 @@ export interface AlertDialogData {
   confirm?: AlertButtonSettings;
   deny?: AlertButtonSettings;
   cancel?: AlertButtonSettings;
-}
-
-export interface ToastDialogData {
-  message: string;
+  afterOpened?: () => void;
+  afterClosed?: (result: AlertResult) => void;
 }

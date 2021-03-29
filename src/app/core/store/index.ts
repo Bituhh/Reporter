@@ -1,14 +1,13 @@
 import {ActionReducerMap, MetaReducer} from '@ngrx/store';
 import {environment} from '../../../environments/environment';
-import * as fromLoginReducer from '../modules/login/store/login.reducers';
+import * as fromAuthReducer from '../modules/auth/store/auth.reducers';
 
 export interface AppState {
-  login: fromLoginReducer.State;
-
+  auth: fromAuthReducer.State;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  login: fromLoginReducer.reducer,
+  auth: fromAuthReducer.reducer,
 };
 
 

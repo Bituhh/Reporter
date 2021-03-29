@@ -6,12 +6,14 @@ import {FunctionWithParametersType} from '@ngrx/store/src/models';
 import * as _ from 'lodash';
 import {combineLatest, from, Observable, of, throwError} from 'rxjs';
 import {catchError, mergeMap, switchMap, withLatestFrom} from 'rxjs/operators';
+import {AlertService} from '../modules/alert/service/alert.service';
 
 @Injectable({providedIn: 'root'})
 export class NgrxUtilsService {
 
   constructor(private router: Router,
-              private actions$: Actions) {
+              private actions$: Actions,
+              private alertService: AlertService) {
   }
 
   actionToAction<A, B, C, D, E>(params: {
@@ -100,12 +102,11 @@ export class NgrxUtilsService {
             if (error.message === 'At least one action is required!') {
               return throwError(error.message);
             }
-            // this.matDialog.create({
-            //   message: error.message,
-            //   buttons: [
-            //     {text: 'Ok'},
-            //   ],
-            // }).then(x => x.present());
+            this.alertService.alert({
+              title: 'Error!',
+              message: error.message,
+              confirm: {text: 'Ok'},
+            });
             if (actionType) {
               return of({
                 type: `${actionType} failed`,
@@ -130,7 +131,7 @@ export class NgrxUtilsService {
     outputTransform?: (data: any, action: Action, ...states: [A, B, C, D, E]) => {};
     successToastMessage?: (data: any, action?: Action, ...states: [A, B, C, D, E]) => string;
     successAlertMessage?: (data: any, action?: Action, ...states: [A, B, C, D, E]) => string;
-    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>) => void;
+    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>, data: any) => void;
     postFailed?: (error: Error) => void;
     failedAlertType?: (error: Error) => NgrxUtilsErrorAlertType;
   }): Observable<Action>;
@@ -142,7 +143,7 @@ export class NgrxUtilsService {
     outputTransform?: (data: any, action: Action, ...states: [A, B, C, D]) => {};
     successToastMessage?: (data: any, action?: Action, ...states: [A, B, C, D]) => string;
     successAlertMessage?: (data: any, action?: Action, ...states: [A, B, C, D]) => string;
-    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>) => void;
+    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>, data: any) => void;
     postFailed?: (error: Error) => void;
     failedAlertType?: (error: Error) => NgrxUtilsErrorAlertType;
   }): Observable<Action>;
@@ -154,7 +155,7 @@ export class NgrxUtilsService {
     outputTransform?: (data: any, action: Action, ...states: [A, B, C]) => {};
     successToastMessage?: (data: any, action?: Action, ...states: [A, B, C]) => string;
     successAlertMessage?: (data: any, action?: Action, ...states: [A, B, C]) => string;
-    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>) => void;
+    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>, data: any) => void;
     postFailed?: (error: Error) => void;
     failedAlertType?: (error: Error) => NgrxUtilsErrorAlertType;
   }): Observable<Action>;
@@ -166,7 +167,7 @@ export class NgrxUtilsService {
     outputTransform?: (data: any, action: Action, ...states: [A, B]) => {};
     successToastMessage?: (data: any, action?: Action, ...states: [A, B]) => string;
     successAlertMessage?: (data: any, action?: Action, ...states: [A, B]) => string;
-    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>) => void;
+    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>, data: any) => void;
     postFailed?: (error: Error) => void;
     failedAlertType?: (error: Error) => NgrxUtilsErrorAlertType;
   }): Observable<Action>;
@@ -178,7 +179,7 @@ export class NgrxUtilsService {
     outputTransform?: (data: any, action: Action, ...states: [A]) => {};
     successToastMessage?: (data: any, action?: Action, ...states: [A]) => string;
     successAlertMessage?: (data: any, action?: Action, ...states: [A]) => string;
-    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>) => void;
+    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>, data: any) => void;
     postFailed?: (error: Error) => void;
     failedAlertType?: (error: Error) => NgrxUtilsErrorAlertType;
   }): Observable<Action>;
@@ -190,7 +191,7 @@ export class NgrxUtilsService {
     outputTransform?: (data: any, action: Action, ...states: Array<any>) => {};
     successToastMessage?: (data: any, action?: Action, ...states: Array<any>) => string;
     successAlertMessage?: (data: any, action?: Action, ...states: Array<any>) => string;
-    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>) => void;
+    successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>, data: any) => void;
     postFailed?: (error: Error) => void;
     failedAlertType?: (error: Error) => NgrxUtilsErrorAlertType;
   }): Observable<Action> {
@@ -224,18 +225,17 @@ export class NgrxUtilsService {
             return from(params.serviceMethod(payload)).pipe(
               mergeMap((data): Observable<Action> => {
                 if (!!params.successAlertMessage) {
-                  // this.matDialog.create({
-                  //   message: params.successAlertMessage(data, action, ...states),
-                  //   buttons: [
-                  //     {text: 'Ok'},
-                  //   ],
-                  // }).then(x => x.present());
+                  this.alertService.alert({
+                    title: 'Error!',
+                    message: params.successAlertMessage(data, action, ...states),
+                    confirm: {text: 'Ok'},
+                  });
                 }
                 if (!!params.successToastMessage) {
-                  // this.matSnackBar.open(params.successToastMessage(data, action, ...states), 'close', {duration: 4000});
+                  this.alertService.toast({message: params.successToastMessage(data, action, ...states)});
                 }
                 if (!!params.successNavigation) {
-                  params.successNavigation(this.router.navigate.bind(this.router));
+                  params.successNavigation(this.router.navigate.bind(this.router), data);
                 }
                 return of({
                   type: `${actionType} complete`,
@@ -250,24 +250,22 @@ export class NgrxUtilsService {
               case NgrxUtilsErrorAlertType.none:
                 break;
               case NgrxUtilsErrorAlertType.alert:
-                // this.matDialog.create({
-                //   message: error.message,
-                //   buttons: [
-                //     {text: 'Ok'},
-                //   ],
-                // }).then(x => x.present());
+                this.alertService.alert({
+                  title: 'Error!',
+                  message: error.message,
+                  confirm: {text: 'Ok'},
+                });
                 break;
               case NgrxUtilsErrorAlertType.toast:
-                // this.matSnackBar.open(error.message, 'close', {duration: 4000});
+                this.alertService.toast({message: error.message});
                 break;
               case NgrxUtilsErrorAlertType.default:
               default:
-                // this.matDialog.create({
-                //   message: error.message,
-                //   buttons: [
-                //     {text: 'Ok'},
-                //   ],
-                // }).then(x => x.present());
+                this.alertService.alert({
+                  title: 'Error!',
+                  message: error.message,
+                  confirm: {text: 'Ok'},
+                });
                 break;
             }
             if (params.postFailed) {

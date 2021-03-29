@@ -1,0 +1,27 @@
+<h1 class="mat-headline">{{data.title}}</h1>
+<mat-dialog-content>
+  <span *ngIf="data.message">{{data.message}}</span>
+  <span *ngIf="data.html" [innerHTML]="data.html"></span>
+  <ng-container *ngTemplateOutlet="data.template"></ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button *ngIf="data.cancel.show"
+          (click)="onClose('cancelled') //noinspection ValidateTypes"
+          mat-raised-button
+          color="warn">
+    {{data.cancel.text}}
+  </button>
+  <button *ngIf="data.deny.show"
+          (click)="onClose('denied') //noinspection ValidateTypes"
+          mat-raised-button
+          color="accent">
+    {{data.deny.text}}
+  </button>
+  <button *ngIf="data.confirm.show"
+          (click)="onClose('confirmed') //noinspection ValidateTypes"
+          mat-raised-button
+          color="primary">
+    {{data.confirm.text}}
+  </button>
+</mat-dialog-actions>

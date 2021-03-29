@@ -2,16 +2,21 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
-import {AlertSuccessComponent} from './components/alert-success/alert-success.component';
-import { AlertToastComponent } from './components/alert-toast/alert-toast.component';
+import {MatIconModule} from '@angular/material/icon';
+import {AlertComponent} from './components/alert/alert.component';
+import {ToastComponent} from './components/toast/toast.component';
 
 
 @NgModule({
-  declarations: [AlertSuccessComponent, AlertToastComponent],
+  declarations: [
+    AlertComponent,
+    ToastComponent,
+  ],
   imports: [
     CommonModule,
     MatDialogModule,
     MatButtonModule,
+    MatIconModule,
   ],
 })
 export class AlertModule {

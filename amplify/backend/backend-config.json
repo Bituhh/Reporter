@@ -1,6 +1,6 @@
 {
   "auth": {
-    "reporter6c8f4925": {
+    "reporter53f070d5": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

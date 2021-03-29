@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {LoginComponent} from '../core/modules/login/login.component';
+import {AuthComponent} from '../core/modules/auth/auth.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
 
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogin(): void {
-    const dialog = this.matDialog.open(LoginComponent, {
+    const dialog = this.matDialog.open(AuthComponent, {
       height: '',
       width: '',
     });

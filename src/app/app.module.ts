@@ -7,6 +7,7 @@ import {environment} from '../environments/environment';
 import {AppMaterialModule} from './app-material.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {AlertModule} from './core/modules/alert/alert.module';
 import {HeaderModule} from './header/header.module';
 import {metaReducers, reducers} from './core/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -24,6 +25,7 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     EffectsModule.forRoot([]),
+    AlertModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

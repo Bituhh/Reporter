@@ -6,7 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatToolbarHarness} from '@angular/material/toolbar/testing';
 import {By} from '@angular/platform-browser';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {LoginComponent} from '../core/modules/login/login.component';
+import {AuthComponent} from '../core/modules/auth/auth.component';
 import {HeaderMaterialModule} from './header-material.module';
 import {HeaderComponent} from './header.component';
 
@@ -56,10 +56,10 @@ describe('HeaderComponent', () => {
       expect(title.innerText).toEqual('App Name');
     });
 
-    describe('login-button', () => {
+    describe('auth-button', () => {
       it('should exist', async () => {
         const loginButton = await loader.getHarness<MatButtonHarness>(MatButtonHarness.with({
-          selector: '[data-test-id="login-button"]',
+          selector: '[data-test-id="auth-button"]',
         }));
 
         expect(loginButton).toBeTruthy();
@@ -68,7 +68,7 @@ describe('HeaderComponent', () => {
       it('should call onLogin', async () => {
         const spy = spyOn(component, 'onLogin');
         const loginButton = await loader.getHarness<MatButtonHarness>(MatButtonHarness.with({
-          selector: '[data-test-id="login-button"]',
+          selector: '[data-test-id="auth-button"]',
         }));
 
         await loginButton.click();
@@ -85,7 +85,7 @@ describe('HeaderComponent', () => {
 
         component.onLogin();
 
-        expect(spy).toHaveBeenCalledOnceWith(LoginComponent);
+        expect(spy).toHaveBeenCalledOnceWith(AuthComponent);
       });
     });
   });
