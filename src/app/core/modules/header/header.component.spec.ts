@@ -6,7 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatToolbarHarness} from '@angular/material/toolbar/testing';
 import {By} from '@angular/platform-browser';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {AuthComponent} from '../core/modules/auth/auth.component';
+import {AuthComponent} from '../auth/auth.component';
 import {HeaderMaterialModule} from './header-material.module';
 import {HeaderComponent} from './header.component';
 

@@ -4,7 +4,7 @@ import {Auth} from 'aws-amplify';
 import {from, Observable, of} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
-export class LoginService {
+export class AuthService {
 
   user: CognitoUser & { challengeName: string };
 
@@ -32,5 +32,17 @@ export class LoginService {
       return from(Auth.completeNewPassword(this.user, params.password).then(() => ({authenticated: true})));
     }
     return of({authenticated: false});
+  }
+
+  signOut(): Observable<null> {
+    return from(Auth.signOut().then(() => null));
+  }
+
+  silentSignIn(): Observable<{ authenticated: boolean }> {
+    return from(
+      Auth.currentAuthenticatedUser()
+        .then(() => ({authenticated: true}))
+        .catch(() => ({authenticated: false})),
+    );
   }
 }

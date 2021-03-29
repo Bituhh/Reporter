@@ -9,7 +9,7 @@ import {SignInComponent} from './component/sign-in/sign-in.component';
 import {AuthMaterialModule} from './auth-material.module';
 import {AuthRoutingModule} from './auth-routing.module';
 import {AuthComponent} from './auth.component';
-import {AuthEffects} from './store/auth-effects.service';
+import {AuthEffects} from './store/auth.effects';
 
 @NgModule({
   declarations: [

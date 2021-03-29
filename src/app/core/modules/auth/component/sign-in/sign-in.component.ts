@@ -20,6 +20,7 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(AuthActions.RouterSilentSignInAction());
     this.$loading = this.store.select(AuthSelectors.loadingSelector);
     this.loginForm = new FormGroup({
       email: new FormControl(null, [
@@ -28,7 +29,6 @@ export class SignInComponent implements OnInit {
       ]),
       password: new FormControl(null),
     });
-
   }
 
   onLogin(): void {

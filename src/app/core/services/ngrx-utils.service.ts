@@ -132,6 +132,7 @@ export class NgrxUtilsService {
     successToastMessage?: (data: any, action?: Action, ...states: [A, B, C, D, E]) => string;
     successAlertMessage?: (data: any, action?: Action, ...states: [A, B, C, D, E]) => string;
     successNavigation?: (navigate: (commands: any[], extras?: NavigationExtras) => Promise<boolean>, data: any) => void;
+    postSuccess?: (data: any) => void;
     postFailed?: (error: Error) => void;
     failedAlertType?: (error: Error) => NgrxUtilsErrorAlertType;
   }): Observable<Action>;
